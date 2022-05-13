@@ -1,0 +1,9 @@
+# Create a timer-sites bedfile
+awk '{print $1 "\t" $2 "\t" $2+1 "\t" $3}' trimer_sites_chr19.out > test_trimer_sites.bed 
+
+# Extract all variation that intersects the second-base (middle base) in the trimer
+bcftools view --regions-file test_trimer_sites.bed clinvar.vcf.gz > test_trimer_sites.vcf 
+
+# Ensure the variant allele results either in gain, loss, or neutral change (since not all variation at the second base in the trimer lead to AG site gain, loss, or neutral change.
+perl subset_trimer_vcf.pl uniq_trimers_AG_gain_loss_neutral.txt test_trimer_sites.bed test_trimer_sites.vcf > test_trimer_vcf_AG_variation.tsv 
+
