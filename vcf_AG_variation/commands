@@ -1,5 +1,5 @@
 # Create a timer-sites bedfile
-awk '{print $1 "\t" $2 "\t" $2+1 "\t" $3}' trimer_sites_chr19.out > test_trimer_sites.bed 
+awk '{print $1 "\t" $2 "\t" $2+1 "\t" $3 }' trimer_sites_chr19.out > test_trimer_sites.bed 
 
 # Extract all variation that intersects the second-base (middle base) in the trimer
 bcftools view --regions-file test_trimer_sites.bed clinvar.vcf.gz > test_trimer_sites.vcf 

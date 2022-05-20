@@ -44,10 +44,12 @@ while(<F>){
 	if($_=~/^#/){ next; }
 	my (@l)=split;
 	if($trimer_loci_hash{$l[0]}{$l[1]}){
-		my $trimer=$trimer_loci_hash{$l[0]}{$l[1]};
+		my $trimer_data=$trimer_loci_hash{$l[0]}{$l[1]};
+		my ($trimer,$local_coord)=split(/:/,$trimer_data);
+		
 		my($a,$b,$c)=split(//,$trimer_loci_hash{$l[0]}{$l[1]});
 		if(($a eq $l[3]) &&  $trimer_lookup_hash{$trimer}{$l[4]}){
-			print "$trimer\t$a\t$l[4]\t$trimer_lookup_hash{$trimer}{$l[4]}\t$_\n";
+			print "$trimer\t$a\t$l[4]\t$trimer_lookup_hash{$trimer}{$l[4]}\t$local_coord\t$_\n";
 		}
 	}
 }
