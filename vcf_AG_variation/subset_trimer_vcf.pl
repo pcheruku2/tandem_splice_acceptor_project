@@ -47,9 +47,9 @@ while(<F>){
 		my $trimer_data=$trimer_loci_hash{$l[0]}{$l[1]};
 		my ($trimer,$local_coord)=split(/:/,$trimer_data);
 		
-		my($a,$b,$c)=split(//,$trimer_loci_hash{$l[0]}{$l[1]});
-		if(($a eq $l[3]) &&  $trimer_lookup_hash{$trimer}{$l[4]}){
-			print "$trimer\t$a\t$l[4]\t$trimer_lookup_hash{$trimer}{$l[4]}\t$local_coord\t$_\n";
+		my($a,$b,$c)=split(//,$trimer); # make sure the second base is checked against reference allele
+		if(($b eq $l[3]) &&  $trimer_lookup_hash{$trimer}{$l[4]}){
+			print "$trimer\t$b\t$l[4]\t$trimer_lookup_hash{$trimer}{$l[4]}\t$local_coord\t$_\n";
 		}
 	}
 }
