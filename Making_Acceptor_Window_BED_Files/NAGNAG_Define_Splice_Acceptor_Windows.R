@@ -94,7 +94,7 @@ WindowFinder <-
         IntronWindowEnd <- exonPositionsEnd[firstCDSexon:lastCDSexon] + 0
         
         ExonWindowStart <- exonPositionsEnd[firstCDSexon:lastCDSexon] + 1
-        ExonWindowEnd <- exonPositionsEnd[firstCDSexon:lastCDSexon] - 30
+        ExonWindowEnd <- exonPositionsEnd[firstCDSexon:lastCDSexon] - 29
         out <-
           # This Shit is going to be backwards for the - strand so that the bed file isn't jacked up
           data.frame(geneInfo,
