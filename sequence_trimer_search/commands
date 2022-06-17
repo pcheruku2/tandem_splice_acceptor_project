@@ -1,5 +1,5 @@
-samtools faidx -n 100 chr19.fa -r regions.txt > regions.fa
-perl trimer_count.pl uniq_trimers_AG_gain_loss_neutral.txt regions.fa chr19
+perl trimer_count.pl uniq_trimers_AG_gain_loss_neutral.txt chr21_+_Intronic_regions.fa chr21_+_intronic
+perl trimer_count.pl uniq_trimers_AG_gain_loss_neutral.txt chr21_-_Intronic_regions.fa chr21_-_intronic
 
 
 
