@@ -71,19 +71,20 @@ while(<F>){
 				print "$trimer\t$b\t$l[4]\t$strand\t$trimer\t$b\t$l[4]\t$trimer_lookup_hash{$trimer}{$l[4]}\t$local_coord\t$_\n";
 			}
 		}elsif($strand eq "-"){
+
 			my $trimer_rc = reverse $trimer;
 			$trimer_rc =~ tr/ATGCatgc/TACGtacg/; 
 
-			my($a,$b,$c)=split(//,$trimer_rc); 
+			my($a_rc,$b_rc,$c_rc)=split(//,$trimer_rc); 
+			my($a,$b,$c)=split(//,$trimer); 
 
-			my $b_rc=$b;
-			$b_rc=~ tr/ATGCatgc/TACGtacg/;
+
 			my $alt_rc=$l[4];
 			$alt_rc=~ tr/ATGCatgc/TACGtacg/;
 			
 
-			if(($b eq $l[3]) &&  $trimer_lookup_hash_rc{$trimer_rc}{$l[4]}){
-				print "$trimer\t$b_rc\t$alt_rc\t$strand\t$trimer_rc\t$b\t$l[4]\t$trimer_lookup_hash_rc{$trimer_rc}{$l[4]}\t$local_coord\t$_\n";
+			if(($b_rc eq $l[3]) &&  $trimer_lookup_hash_rc{$trimer_rc}{$l[4]}){
+				print "$trimer\t$b\t$alt_rc\t$strand\t$trimer_rc\t$b_rc\t$l[4]\t$trimer_lookup_hash_rc{$trimer_rc}{$l[4]}\t$local_coord\t$_\n";
 			}
 		}
 	}
