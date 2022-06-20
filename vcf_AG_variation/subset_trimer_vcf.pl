@@ -84,7 +84,7 @@ while(<F>){
 			
 
 			if(($b_rc eq $l[3]) &&  $trimer_lookup_hash_rc{$trimer_rc}{$l[4]}){
-				print "$trimer\t$b\t$alt_rc\t$strand\t$trimer_rc\t$b_rc\t$l[4]\t$trimer_lookup_hash_rc{$trimer_rc}{$l[4]}\t$local_coord\t$_\n";
+				print "$trimer\t$b\t$alt_rc\t$strand\t$trimer_rc\t$b_rc\t$l[4]\t$trimer_lookup_hash{$trimer}{$alt_rc}\t$local_coord\t$_\n";
 			}
 		}
 	}
