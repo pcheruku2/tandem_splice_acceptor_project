@@ -104,24 +104,107 @@ while(<F>){
 			
 		for(my $a=0;$a<=length($seq)-3; $a++){
                       	my $trimer=substr($seq, $a, 3);
-			my $coord=$from_base1+$a;
+			my $coord=();
 			my $local_coordinate="N";
 
-			if($seq_class eq "exon"){
+			if($seq_class eq "exon"  && $strand eq "+"){
+				$coord=$from_base1+$a; # zero-base for bedfile;
 				$local_coordinate=$a+1;
-			}elsif($seq_class eq "intron"){
+
+				#print "seq class : exon\n";
+				#print "seq : $seq\n";
+				#print "strand : $strand\n";
+				#print "trimer : $trimer\n";
+				#print "a   : $a\n";
+				#print "from : $from_base1\n";
+				#print "to   : $to_base1\n";
+				#print "coordinate : $coord\n";
+				#print "local coordinate : $local_coordinate\n\n";
+
+				if($trimer_hash{$trimer}){
+					my $lcd=$coord+1;
+					my $cn=$chr;
+					$cn=~s/chr//g;
+
+					# Write to bedfile
+					print B "$cn\t$coord\t$lcd\t$trimer:$local_coordinate:$strand\n";
+					$trimer_count{$trimer}++;
+				}
+	
+			}elsif($seq_class eq "intron" && $strand eq "+"){
+				$coord=$from_base1+$a;
 				$local_coordinate=$a-$len+2;
+
+				#print "seq class : intron\n";
+				#print "seq : $seq\n";
+				#print "strand : $strand\n";
+				#print "trimer : $trimer\n";
+				#print "a   : $a\n";
+				#print "from : $from_base1\n";
+				#print "to   : $to_base1\n";
+				#print "coordinate : $coord\n";
+				#print "local coordinate : $local_coordinate\n\n";
+
+				if($trimer_hash{$trimer}){
+					my $lcd=$coord+1;
+					my $cn=$chr;
+					$cn=~s/chr//g;
+
+					# Write to bedfile
+					print B "$cn\t$coord\t$lcd\t$trimer:$local_coordinate:$strand\n";
+					$trimer_count{$trimer}++;
+				}
+
+			}elsif($seq_class eq "exon"  && $strand eq "-"){
+				$coord=$to_base1-$a-2; # zero-base for bedfile;
+				$local_coordinate=$a+1;
+
+				#print "seq class : exon\n";
+				#print "seq : $seq\n";
+				#print "strand : $strand\n";
+				#print "trimer : $trimer\n";
+				#print "a   : $a\n";
+				#print "from : $from_base1\n";
+				#print "to   : $to_base1\n";
+				#print "coordinate : $coord\n";
+				#print "local coordinate : $local_coordinate\n\n";
+
+				if($trimer_hash{$trimer}){
+					my $lcd=$coord+1;
+					my $cn=$chr;
+					$cn=~s/chr//g;
+
+					# Write to bedfile
+					print B "$cn\t$coord\t$lcd\t$trimer:$local_coordinate:$strand\n";
+					$trimer_count{$trimer}++;
+				}
+			}elsif($seq_class eq "intron" && $strand eq "-"){
+				$coord=$to_base1-$a-2;
+				$local_coordinate=$a-$len+2;
+
+				#print "seq class : intron\n";
+				#print "seq : $seq\n";
+				#print "strand : $strand\n";
+				#print "trimer : $trimer\n";
+				#print "a   : $a\n";
+				#print "from : $from_base1\n";
+				#print "to   : $to_base1\n";
+				#print "coordinate : $coord\n";
+				#print "local coordinate : $local_coordinate\n\n";
+
+				if($trimer_hash{$trimer}){
+					my $lcd=$coord+1;
+					my $cn=$chr;
+					$cn=~s/chr//g;
+
+					# Write to bedfile
+					print B "$cn\t$coord\t$lcd\t$trimer:$local_coordinate:$strand\n";
+					$trimer_count{$trimer}++;
+				}
 			}
 
-			if($trimer_hash{$trimer}){
-				my $lcd=$coord+1;
-				my $cn=$chr;
-				$cn=~s/chr//g;
+	
 
-				# Write to bedfile
-				print B "$cn\t$coord\t$lcd\t$trimer:$local_coordinate:$strand\n";
-				$trimer_count{$trimer}++;
-			}
                 }
 
 		$chr=();
