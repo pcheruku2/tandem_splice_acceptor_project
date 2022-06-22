@@ -4,6 +4,7 @@ homeDir='/home/frostfg/NAGNAG/genome_wide_trimer_code_V2'
 fastaDir='/home/frostfg/NAGNAG/ChrFastas'
 refDir='/home/frostfg/NAGNAG/'
 
+
 cd $refDir
 AllChroms=`\ls UCSCfastas/*fa | sed -e "s/UCSCfastas\\///g" | sed -e "s/\\.fa//g"`
 
@@ -25,14 +26,17 @@ do
 	# Now negative strand gene regions
         samtools faidx -n 100 -i "$refDir"UCSCfastas/"$chr".fa -r "$homeDir"/OutputRegions/"$chr"_-_Exonic_regions.txt > "$fastaDir"/"$chr"_-_Exonic_regions.fa
 
-	# Slap both strands into one .fa file
-	cat "$fastaDir"/"$chr"_+_Exonic_regions.fa "$fastaDir"/"$chr"_-_Exonic_regions.fa >  "$fastaDir"/"$chr"_all_Exonic_regions.fa
-	rm "$fastaDir"/"$chr"_+_Exonic_regions.fa
-	rm "$fastaDir"/"$chr"_-_Exonic_regions.fa
-
 	# On to the trimer count script
-	cd PerlTrimerOut/ExonicOut
-	perl "$homeDir"/sequence_trimer_search/trimer_count.pl "$homeDir"/sequence_trimer_search/uniq_trimers_AG_gain_loss_neutral.txt "$fastaDir"/"$chr"_all_Exonic_regions.fa ExonicOut_"$chr"
+        cd PerlTrimerOut/ExonicOut
+	perl  "$homeDir"/sequence_trimer_search/trimer_count.pl\
+		 "$homeDir"/sequence_trimer_search/uniq_trimers_AG_gain_loss_neutral.txt\
+		 "$fastaDir"/"$chr"_+_Exonic_regions.fa\
+		 "$chr"_+_Exonic_region
+	perl  "$homeDir"/sequence_trimer_search/trimer_count.pl\
+                 "$homeDir"/sequence_trimer_search/uniq_trimers_AG_gain_loss_neutral.txt\
+                 "$fastaDir"/"$chr"_-_Exonic_regions.fa\
+                 "$chr"_-_Exonic_region
+	
 	cd $homeDir
 	echo Working on "$chr" exonic windows...... Done
 done
@@ -54,14 +58,18 @@ do
         # Now negative strand gene regions
         samtools faidx -n 100 -i "$refDir"UCSCfastas/"$chr".fa -r "$homeDir"/OutputRegions/"$chr"_-_Intronic_regions.txt > "$fastaDir"/"$chr"_-_Intronic_regions.fa
 
-        # Slap both strands into one .fa file
-        cat "$fastaDir"/"$chr"_+_Intronic_regions.fa "$fastaDir"/"$chr"_-_Intronic_regions.fa >  "$fastaDir"/"$chr"_all_Intronic_regions.fa
-        rm "$fastaDir"/"$chr"_+_Intronic_regions.fa
-        rm "$fastaDir"/"$chr"_-_Intronic_regions.fa
-
         # On to the trimer count script
         cd PerlTrimerOut/IntronicOut
-        perl "$homeDir"/sequence_trimer_search/trimer_count.pl "$homeDir"/sequence_trimer_search/uniq_trimers_AG_gain_loss_neutral.txt "$fastaDir"/"$chr"_all_Intronic_regions.fa IntronicOut_"$chr"
+
+        perl  "$homeDir"/sequence_trimer_search/trimer_count.pl\
+                 "$homeDir"/sequence_trimer_search/uniq_trimers_AG_gain_loss_neutral.txt\
+                 "$fastaDir"/"$chr"_+_Intronic_regions.fa\
+                 "$chr"_+_Intronic_region
+        perl  "$homeDir"/sequence_trimer_search/trimer_count.pl\
+                 "$homeDir"/sequence_trimer_search/uniq_trimers_AG_gain_loss_neutral.txt\
+                 "$fastaDir"/"$chr"_-_Intronic_regions.fa\
+                 "$chr"_-_Intronic_region
+
         cd $homeDir
         echo Working on "$chr" intronic windows...... Done
 done
