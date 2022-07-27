@@ -14,7 +14,7 @@
 # The backslashes offer a lot better organization and legibility in my opinion, which is why I almost always use them for functions with several inputs.
 # Another note here: the tab indent is not necessary, I just think it looks better/is easier to read
 
-# Firt 10 files
+# First 10 files
 FileList=`\ls *vcf.gz | head`
 
 BedDir="/home/frostfg/NAGNAG/genome_wide_trimer_code_V2/PerlTrimerOut"
