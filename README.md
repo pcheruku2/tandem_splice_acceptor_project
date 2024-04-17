@@ -1,1 +1,1 @@
-# splice-acceptor-code
+# Tandem Splice Acceptor Project
