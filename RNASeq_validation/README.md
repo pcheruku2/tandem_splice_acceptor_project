@@ -1,1 +1,1 @@
-# splice-acceptor-code
+# RNASeq validation
