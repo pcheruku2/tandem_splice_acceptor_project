@@ -1,1 +1,2 @@
-# splice-acceptor-code
+# Making Splice Acceptor Region (SAR) bedfiles
+
