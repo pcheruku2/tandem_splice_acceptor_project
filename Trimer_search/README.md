@@ -1,1 +1,1 @@
-# splice-acceptor-code
+# Sequence trimer search
