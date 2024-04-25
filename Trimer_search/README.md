@@ -1,1 +1,1 @@
-# Sequence trimer search
+# Sequence and VCF trimer search
