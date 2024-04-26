@@ -3,7 +3,7 @@ Randomly selecting 1,000, 10,000, 100,000 and 1,000,000 windows of 33 base pairs
 
 ## Requirements
 1. Install [Samtools](http://www.htslib.org/download/), version 1.20 or up
-2. Download [hg19_ref.fa.gz](link_will_be_provided)
+2. Download [hg19_ref.fa.gz](https://doi.org/10.5281/zenodo.11074244)
 3. Python3
 4. Perl
 
